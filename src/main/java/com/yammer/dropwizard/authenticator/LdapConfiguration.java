@@ -12,158 +12,189 @@ import java.util.Set;
 
 @SuppressWarnings("unused")
 public class LdapConfiguration {
-    @NotNull
-    @Valid
-    private URI uri = URI.create("ldaps://www.example.com:636");
+	@NotNull
+	@Valid
+	private URI uri = URI.create("ldaps://www.example.com:636");
 
-    @NotNull
-    @Valid
-    private CacheBuilderSpec cachePolicy = CacheBuilderSpec.disableCaching();
+	@NotNull
+	@Valid
+	private CacheBuilderSpec cachePolicy = CacheBuilderSpec.disableCaching();
 
-    @NotNull
-    @NotEmpty
-    private String userFilter = "ou=people,dc=example,dc=com";
+	@NotNull
+	@NotEmpty
+	private String userFilter = "ou=people,dc=example,dc=com";
 
-    @NotNull
-    @NotEmpty
-    private String groupFilter = "ou=groups,dc=example,dc=com";
+	@NotNull
+	@NotEmpty
+	private String groupFilter = "ou=groups,dc=example,dc=com";
 
-    @NotNull
-    @NotEmpty
-    private String userNameAttribute = "cn";
+	@NotNull
+	@NotEmpty
+	private String userNameAttribute = "cn";
 
-    @NotNull
-    @NotEmpty
-    private String groupNameAttribute = "cn";
+	@NotNull
+	@NotEmpty
+	private String groupNameAttribute = "cn";
 
-    @NotNull
-    @NotEmpty
-    private String groupMembershipAttribute = "memberUid";
+	@NotNull
+	@NotEmpty
+	private String groupMembershipAttribute = "memberUid";
 
-    @NotNull
-    @NotEmpty
-    private String groupClassName = "posixGroup";
+	@NotNull
+	@NotEmpty
+	private String groupClassName = "posixGroup";
 
-    @NotNull
-    @Valid
-    private Duration connectTimeout = Duration.milliseconds(500);
+	@NotNull
+	@Valid
+	private Duration connectTimeout = Duration.milliseconds(500);
 
-    @NotNull
-    @Valid
-    private Duration readTimeout = Duration.milliseconds(500);
+	@NotNull
+	@Valid
+	private Duration readTimeout = Duration.milliseconds(500);
 
-    @NotNull
-    @Valid
-    private Set<String> restrictToGroups = Sets.newHashSet();
+	@NotNull
+	@Valid
+	private Set<String> restrictToGroups = Sets.newHashSet();
 
-    @NotNull
-    @Valid
-    private TlsOption negotiateTls = TlsOption.NONE;
+	@NotNull
+	@Valid
+	private TlsOption negotiateTls = TlsOption.NONE;
 
-    public URI getUri() {
-        return uri;
-    }
+	private String connectionUsername;
 
-    public LdapConfiguration setUri(URI uri) {
-        this.uri = uri;
-        return this;
-    }
+	private String connectionPassword;
 
-    public CacheBuilderSpec getCachePolicy() {
-        return cachePolicy;
-    }
+	private String userClassName = "user";
 
-    public LdapConfiguration setCachePolicy(CacheBuilderSpec cachePolicy) {
-        this.cachePolicy = cachePolicy;
-        return this;
-    }
+	public URI getUri() {
+		return uri;
+	}
 
-    public String getUserFilter() {
-        return userFilter;
-    }
+	public LdapConfiguration setUri(URI uri) {
+		this.uri = uri;
+		return this;
+	}
 
-    public LdapConfiguration setUserFilter(String userFilter) {
-        this.userFilter = userFilter;
-        return this;
-    }
+	public CacheBuilderSpec getCachePolicy() {
+		return cachePolicy;
+	}
 
-    public String getGroupFilter() {
-        return groupFilter;
-    }
+	public LdapConfiguration setCachePolicy(CacheBuilderSpec cachePolicy) {
+		this.cachePolicy = cachePolicy;
+		return this;
+	}
 
-    public LdapConfiguration setGroupFilter(String groupFilter) {
-        this.groupFilter = groupFilter;
-        return this;
-    }
+	public String getUserFilter() {
+		return userFilter;
+	}
 
-    public String getUserNameAttribute() {
-        return userNameAttribute;
-    }
+	public LdapConfiguration setUserFilter(String userFilter) {
+		this.userFilter = userFilter;
+		return this;
+	}
 
-    public LdapConfiguration setUserNameAttribute(String userNameAttribute) {
-        this.userNameAttribute = userNameAttribute;
-        return this;
-    }
+	public String getGroupFilter() {
+		return groupFilter;
+	}
 
-    public String getGroupNameAttribute() {
-        return groupNameAttribute;
-    }
+	public LdapConfiguration setGroupFilter(String groupFilter) {
+		this.groupFilter = groupFilter;
+		return this;
+	}
 
-    public LdapConfiguration setGroupNameAttribute(String groupNameAttribute) {
-        this.groupNameAttribute = groupNameAttribute;
-        return this;
-    }
+	public String getUserNameAttribute() {
+		return userNameAttribute;
+	}
 
-    public String getGroupMembershipAttribute() {
-        return groupMembershipAttribute;
-    }
+	public LdapConfiguration setUserNameAttribute(String userNameAttribute) {
+		this.userNameAttribute = userNameAttribute;
+		return this;
+	}
 
-    public LdapConfiguration setGroupMembershipAttribute(String groupMembershipAttribute) {
-        this.groupMembershipAttribute = groupMembershipAttribute;
-        return this;
-    }
+	public String getGroupNameAttribute() {
+		return groupNameAttribute;
+	}
 
-    public String getGroupClassName() {
-        return groupClassName;
-    }
+	public LdapConfiguration setGroupNameAttribute(String groupNameAttribute) {
+		this.groupNameAttribute = groupNameAttribute;
+		return this;
+	}
 
-    public LdapConfiguration setGroupClassName(String groupClassName) {
-        this.groupClassName = groupClassName;
-        return this;
-    }
+	public String getGroupMembershipAttribute() {
+		return groupMembershipAttribute;
+	}
 
-    public Duration getConnectTimeout() {
-        return connectTimeout;
-    }
+	public LdapConfiguration setGroupMembershipAttribute(String groupMembershipAttribute) {
+		this.groupMembershipAttribute = groupMembershipAttribute;
+		return this;
+	}
 
-    public LdapConfiguration setConnectTimeout(Duration connectTimeout) {
-        this.connectTimeout = connectTimeout;
-        return this;
-    }
+	public String getGroupClassName() {
+		return groupClassName;
+	}
 
-    public Duration getReadTimeout() {
-        return readTimeout;
-    }
+	public LdapConfiguration setGroupClassName(String groupClassName) {
+		this.groupClassName = groupClassName;
+		return this;
+	}
 
-    public LdapConfiguration setReadTimeout(Duration readTimeout) {
-        this.readTimeout = readTimeout;
-        return this;
-    }
+	public Duration getConnectTimeout() {
+		return connectTimeout;
+	}
 
-    public Set<String> getRestrictToGroups() {
-        return restrictToGroups;
-    }
+	public LdapConfiguration setConnectTimeout(Duration connectTimeout) {
+		this.connectTimeout = connectTimeout;
+		return this;
+	}
 
-    public LdapConfiguration addRestrictedGroup(String group) {
-        restrictToGroups.add(group);
-        return this;
-    }
+	public Duration getReadTimeout() {
+		return readTimeout;
+	}
 
-    public TlsOption getNegotiateTls() {
-        return negotiateTls;
-    }
+	public LdapConfiguration setReadTimeout(Duration readTimeout) {
+		this.readTimeout = readTimeout;
+		return this;
+	}
 
-    public void setNegotiateTls(TlsOption negotiateTls) {
-        this.negotiateTls = negotiateTls;
-    }
+	public Set<String> getRestrictToGroups() {
+		return restrictToGroups;
+	}
+
+	public LdapConfiguration addRestrictedGroup(String group) {
+		restrictToGroups.add(group);
+		return this;
+	}
+
+	public TlsOption getNegotiateTls() {
+		return negotiateTls;
+	}
+
+	public void setNegotiateTls(TlsOption negotiateTls) {
+		this.negotiateTls = negotiateTls;
+	}
+
+	public void setConnectionUsername(String username) {
+		this.connectionUsername = username;
+	}
+
+	public String getConnectionUsername() {
+		return connectionUsername;
+	}
+
+	public void setConnectionPassword(String password) {
+		this.connectionPassword = password;
+	}
+
+	public String getConnectionPassword() {
+		return connectionPassword;
+	}
+
+	public void setUserClassName(String userClassName) {
+		this.userClassName = userClassName;
+	}
+
+	public String getUserClassName() {
+		return userClassName;
+	}
+
 }

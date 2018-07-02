@@ -1,5 +1,6 @@
 package com.yammer.dropwizard.authenticator.tests;
 
+import com.yammer.dropwizard.authenticator.LdapAuthenticationProvider;
 import com.yammer.dropwizard.authenticator.LdapAuthenticator;
 import com.yammer.dropwizard.authenticator.LdapConfiguration;
 import io.dropwizard.auth.AuthenticationException;
@@ -11,7 +12,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class LdapAuthenticatorTest {
-    private static LdapAuthenticator ldapAuthenticator;
+    private static LdapAuthenticationProvider ldapAuthenticator;
 
     @BeforeClass
     public static void setup() throws Exception {

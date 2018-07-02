@@ -11,9 +11,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ResourceAuthenticator implements Authenticator<BasicCredentials, User> {
 
-    private final LdapAuthenticator ldapAuthenticator;
+    private final LdapAuthenticationProvider ldapAuthenticator;
 
-    public ResourceAuthenticator(LdapAuthenticator ldapAuthenticator) {
+    public ResourceAuthenticator(LdapAuthenticationProvider ldapAuthenticator) {
         this.ldapAuthenticator = checkNotNull(ldapAuthenticator);
     }
 

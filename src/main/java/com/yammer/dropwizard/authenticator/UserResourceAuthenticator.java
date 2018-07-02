@@ -10,9 +10,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UserResourceAuthenticator implements Authenticator<BasicCredentials, User> {
 
-    private final LdapAuthenticator ldapAuthenticator;
+    private final LdapAuthenticationProvider ldapAuthenticator;
 
-    public UserResourceAuthenticator(LdapAuthenticator ldapAuthenticator) {
+    public UserResourceAuthenticator(LdapAuthenticationProvider ldapAuthenticator) {
         this.ldapAuthenticator = checkNotNull(ldapAuthenticator);
     }
 

@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class LdapAuthenticator {
+public class LdapAuthenticator implements LdapAuthenticationProvider {
     private static final Logger LOG = LoggerFactory.getLogger(LdapAuthenticator.class);
     protected final LdapConfiguration configuration;
 
@@ -31,7 +31,11 @@ public class LdapAuthenticator {
         return name.replaceAll("[^A-Za-z0-9-_.]", "");
     }
 
-    public boolean canAuthenticate() {
+    /* (non-Javadoc)
+	 * @see com.yammer.dropwizard.authenticator.LdapAuthenticationProvider#canAuthenticate()
+	 */
+    @Override
+	public boolean canAuthenticate() {
         try {
             new AutoclosingLdapContext(contextConfiguration(),
                     configuration.getNegotiateTls()).close();
@@ -100,7 +104,11 @@ public class LdapAuthenticator {
             || ("groupOfUniqueNames".equalsIgnoreCase(className) && "uniqueMember".equalsIgnoreCase(membershipAttr));
     }
 
-    public boolean authenticate(BasicCredentials credentials) throws io.dropwizard.auth.AuthenticationException {
+    /* (non-Javadoc)
+	 * @see com.yammer.dropwizard.authenticator.LdapAuthenticationProvider#authenticate(io.dropwizard.auth.basic.BasicCredentials)
+	 */
+    @Override
+	public boolean authenticate(BasicCredentials credentials) throws io.dropwizard.auth.AuthenticationException {
         final String sanitizedUsername = sanitizeEntity(credentials.getUsername());
         try {
             try (AutoclosingLdapContext context = buildContext(sanitizedUsername, credentials.getPassword())) {
@@ -130,7 +138,11 @@ public class LdapAuthenticator {
         return String.format("%s=%s,%s", configuration.getUserNameAttribute(), username, configuration.getUserFilter());
     }
     
-    public Optional<User> authenticateAndReturnPermittedGroups(BasicCredentials credentials) throws io.dropwizard.auth.AuthenticationException {
+    /* (non-Javadoc)
+	 * @see com.yammer.dropwizard.authenticator.LdapAuthenticationProvider#authenticateAndReturnPermittedGroups(io.dropwizard.auth.basic.BasicCredentials)
+	 */
+    @Override
+	public Optional<User> authenticateAndReturnPermittedGroups(BasicCredentials credentials) throws io.dropwizard.auth.AuthenticationException {
         final String sanitizedUsername = sanitizeEntity(credentials.getUsername());
         try {
             try (AutoclosingLdapContext context = buildContext(sanitizedUsername, credentials.getPassword())) {
